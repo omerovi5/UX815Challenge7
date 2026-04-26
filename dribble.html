@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dribbble – Search: landing page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    body {
+      background: #fff;
+      color: #1a1a1a;
+      font-family: "Haas Grot Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    /* ── Filter bar ── */
+    .filter-bar {
+      padding: 18px 0 10px;<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dribbble – Search: landing page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    body {
+      background: #fff;
+      color: #1a1a1a;
+      font-family: "Haas Grot Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    /* ── Filter bar ── */
+    .filter-bar {
+      padding: 18px 0 10px;
+      border-bottom: 1px solid #e8e8e8;
+      margin-bottom: 28px;
+    }
+
+    .btn-popular {
+      border: 1.5px solid #ddd;
+      border-radius: 999px;
+      background: #fff;
+      color: #1a1a1a;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 6px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .btn-popular:hover { background: #f5f5f5; }
+
+    .filter-tabs {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: nowrap;
+      overflow: hidden;
+    }
+
+    .filter-tab {
+      background: none;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: #6e6e6e;
+      padding: 6px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .filter-tab:hover { background: #f5f5f5; color: #1a1a1a; }
+
+    .filter-tab.active {
+      color: #1a1a1a;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .btn-filters {
+      border: 1.5px solid #ddd;
+      border-radius: 999px;
+      background: #fff;
+      color: #1a1a1a;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 6px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .btn-filters:hover { background: #f5f5f5; }
+
+    /* ── Shot card ── */
+    .shot-card {
+      margin-bottom: 32px;
+    }
+
+    .shot-thumb {
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .shot-thumb img,
+    .shot-thumb .shot-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .shot-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .shot-thumb:hover img,
+    .shot-thumb:hover .shot-placeholder {
+      transform: scale(1.02);
+    }
+
+    .shot-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0) ;
+      border-radius: 12px;
+      transition: background 0.25s;
+      display: flex;
+      align-items: flex-end;
+      padding: 12px;
+      pointer-events: none;
+    }
+
+    .shot-thumb:hover .shot-overlay {
+      background: rgba(0,0,0,0.08);
+    }
+
+    .shot-overlay-title {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      background: rgba(0,0,0,0.55);
+      border-radius: 6px;
+      padding: 4px 8px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .shot-thumb:hover .shot-overlay-title {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .overlay-actions {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 6px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .shot-thumb:hover .overlay-actions { opacity: 1; }
+
+    .overlay-btn {
+      background: #fff;
+      border: none;
+      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #444;
+      cursor: pointer;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+
+    .overlay-btn:hover { background: #f5f5f5; }
+
+    /* ── Author row ── */
+    .author-row {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      gap: 8px;
+    }
+
+    .author-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .author-avatar-text {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .author-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: #1a1a1a;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .badge-team, .badge-pro {
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 1px 5px;
+      flex-shrink: 0;
+    }
+
+    .badge-team {
+      background: #eaf0ff;
+      color: #3d5af1;
+    }
+
+    .badge-pro {
+      background: #fff3db;
+      color: #c07a00;
+    }
+
+    .stat-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: #9e9e9e;
+    }
+
+    /* ── Placeholder canvases ── */
+    .canvas-beige   { background: #f5ede0; }
+    .canvas-black   { background: #1a1a1a; }
+    .canvas-white   { background: #f0f0f0; border: 1px solid #e5e5e5; }
+    .canvas-orange  { background: #f0a500; }
+    .canvas-cream2  { background: #f5ede0; }
+    .canvas-tan     { background: #e8e0d0; }
+
+    /* Icon grid inside shot placeholders */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 28px;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+    }
+
+    .icon-grid i {
+      font-size: 26px;
+      color: #6a7bbd;
+      opacity: 0.85;
+    }
+
+    .icon-grid-dark i { color: #ccc; }
+
+    .icon-grid-outline i {
+      font-size: 24px;
+      color: #888;
+      opacity: 0.7;
+    }
+
+    .icon-grid-purple i {
+      font-size: 30px;
+      color: #5146d6;
+    }
+
+    /* Illustration placeholder */
+    .illus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 24px;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+    }
+
+    .illus-figure {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+    }
+
+    .ad-card .shot-placeholder {
+      background: #f0a500;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .ad-label {
+      font-size: 12px;
+      color: #9e9e9e;
+    }
+
+    .ad-actions {
+      font-size: 12px;
+      color: #9e9e9e;
+    }
+
+    .ad-actions a { color: #9e9e9e; text-decoration: none; }
+    .ad-actions a:hover { color: #444; }
+  </style>
+</head>
+<body>
+
+<div class="container-lg px-4">
+
+  <!-- Filter bar -->
+  <div class="filter-bar d-flex align-items-center gap-3">
+
+    <button class="btn-popular">
+      Popular <i class="bi bi-chevron-down" style="font-size:11px;"></i>
+    </button>
+
+    <div class="filter-tabs">
+      <button class="filter-tab active">Discover</button>
+      <button class="filter-tab">Animation</button>
+      <button class="filter-tab">Branding</button>
+      <button class="filter-tab">Illustration</button>
+      <button class="filter-tab">Mobile</button>
+      <button class="filter-tab">Print</button>
+      <button class="filter-tab"><i class="bi bi-chevron-right"></i></button>
+    </div>
+
+    <button class="btn-filters ms-auto">
+      <i class="bi bi-sliders"></i> Filters
+    </button>
+
+  </div>
+
+  <!-- Shot grid -->
+  <div class="row g-4">
+
+    <!-- Card 1 – Siege Media (beige, business icons) -->
+    <div class="col-12 col-md-4">
+      <div class="shot-card">
+        <div class="shot-thumb canvas-beige">
+          <div class="shot-placeholder canvas-beige" style="aspect-ratio:4/3;">
+            <div class="icon-grid">
+              <i class="bi bi-bar-chart-line"></i>
+              <i class="bi bi-bank"></i>
+              <i class="bi bi-dice-3"></i>
+              <i class="bi bi-bag-dollar"></i>
+              <i class="bi bi-tools"></i>
+              <i class="bi bi-globe2"></i>
+              <i class="bi bi-handshake"></i>
+              <i class="bi bi-calendar3"></i>
+              <i class="bi bi-megaphone"></i>
+            </div>
+          </div>
+          <div class="shot-overlay"></div>
+        </div>
+        <div class="author-row">
+          <div class="author-avatar-text" style="background:#d44;">sm</div>
+          <span class="author-name">Siege Media</span>
+          <span class="badge-team">TEAM</span>
+          <div class="stat-row">
+            <span class="stat-item"><i class="bi bi-heart"></i> 193</span>
+            <span class="stat-item"><i class="bi bi-eye"></i> 67.4k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 – Orman Clark (dark, dense icon set) -->
+    <div class="col-12 col-md-4">
+      <div class="shot-card">
+        <div class="shot-thumb canvas-black">
+          <div class="shot-placeholder canvas-black" style="aspect-ratio:4/3;">
+            <div class="icon-grid icon-grid-dark" style="grid-template-columns: repeat(8,1fr); gap:10px; padding:20px;">
+              <i class="bi bi-type-h1"></i><i class="bi bi-type-h2"></i><i class="bi bi-type-h3"></i><i class="bi bi-type-bold"></i>
+              <i class="bi bi-type-italic"></i><i class="bi bi-link45deg"></i><i class="bi bi-image"></i><i class="bi bi-table"></i>
+              <i class="bi bi-list-ul"></i><i class="bi bi-list-ol"></i><i class="bi bi-code-slash"></i><i class="bi bi-blockquote-left"></i>
+              <i class="bi bi-grip-horizontal"></i><i class="bi bi-layout-split"></i><i class="bi bi-columns-gap"></i><i class="bi bi-grid-3x3"></i>
+              <i class="bi bi-mic"></i><i class="bi bi-camera-video"></i><i class="bi bi-film"></i><i class="bi bi-music-note"></i>
+              <i class="bi bi-file-text"></i><i class="bi bi-file-earmark-pdf"></i><i class="bi bi-folder2"></i><i class="bi bi-archive"></i>
+              <i class="bi bi-search"></i><i class="bi bi-sliders"></i><i class="bi bi-funnel"></i><i class="bi bi-sort-down"></i>
+              <i class="bi bi-bell"></i><i class="bi bi-gear"></i><i class="bi bi-lock"></i><i class="bi bi-shield-check"></i>
+            </div>
+          </div>
+          <div class="shot-overlay"></div>
+        </div>
+        <div class="author-row">
+          <div class="author-avatar-text" style="background:#5b8ef0;">OC</div>
+          <span class="author-name">Orman Clark</span>
+          <span class="badge-pro">PRO</span>
+          <div class="stat-row">
+            <span class="stat-item"><i class="bi bi-heart"></i> 98</span>
+            <span class="stat-item"><i class="bi bi-eye"></i> 24.2k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 – Jordon Cheung (light, outline icons) -->
+    <div class="col-12 col-md-4">
+      <div class="shot-card">
+        <div class="shot-thumb canvas-white">
+          <div class="shot-placeholder canvas-white" style="aspect-ratio:4/3;">
+            <div class="icon-grid icon-grid-outline" style="grid-template-columns:repeat(5,1fr); gap:14px; padding:24px;">
+              <i class="bi bi-diagram-3"></i><i class="bi bi-grid-1x2"></i><i class="bi bi-bezier2"></i><i class="bi bi-calendar4"></i><i class="bi bi-gear-wide"></i>
+              <i class="bi bi-cloud-download"></i><i class="bi bi-file-earmark-bar-graph"></i><i class="bi bi-eyedropper"></i><i class="bi bi-lock-fill"></i><i class="bi bi-pin-map"></i>
+              <i class="bi bi-floppy"></i><i class="bi bi-sliders2"></i><i class="bi bi-shield-half"></i><i class="bi bi-chat-dots"></i><i class="bi bi-card-image"></i>
+              <i class="bi bi-diagram-2"></i><i class="bi bi-briefcase"></i><i class="bi bi-graph-up"></i><i class="bi bi-arrow-left-right"></i><i class="bi bi-bar-chart-steps"></i>
+            </div>
+          </div>
+          <div class="shot-overlay"></div>
+        </div>
+        <div class="author-row">
+          <div class="author-avatar-text" style="background:#9b7ec8;">JC</div>
+          <span class="author-name">Jordon Cheung</span>
+          <div class="stat-row">
+            <span class="stat-item"><i class="bi bi-heart"></i> 176</span>
+            <span class="stat-item"><i class="bi bi-eye"></i> 57.1k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 – Aldo Crusher (beige, purple 3D icons) -->
+    <div class="col-12 col-md-4">
+      <div class="shot-card">
+        <div class="shot-thumb canvas-beige">
+          <div class="shot-placeholder canvas-beige" style="aspect-ratio:4/3;">
+            <div class="icon-grid icon-grid-purple" style="grid-template-columns:repeat(3,1fr); gap:18px; padding:30px;">
+              <i class="bi bi-camera-fill"></i>
+              <i class="bi bi-person-fill"></i>
+              <i class="bi bi-box-fill"></i>
+              <i class="bi bi-key-fill"></i>
+              <i class="bi bi-stars"></i>
+              <i class="bi bi-heart-fill"></i>
+              <i class="bi bi-moon-stars-fill"></i>
+              <i class="bi bi-gem"></i>
+              <i class="bi bi-eye-fill"></i>
+            </div>
+          </div>
+          <div class="shot-overlay"></div>
+        </div>
+        <div class="author-row">
+          <div class="author-avatar-text" style="background:#e05;">AC</div>
+          <span class="author-name">Aldo Crusher</span>
+          <span class="badge-pro">PRO</span>
+          <div class="stat-row">
+            <span class="stat-item"><i class="bi bi-heart"></i> 65</span>
+            <span class="stat-item"><i class="bi bi-eye"></i> 6.7k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 – Canto (ad, orange) -->
+    <div class="col-12 col-md-4">
+      <div class="shot-card ad-card">
+        <div class="shot-thumb" style="position:relative;">
+          <div class="shot-placeholder canvas-orange" style="aspect-ratio:4/3; border-radius:12px;">
+          </div>
+          <div class="overlay-actions" style="opacity:1;">
+            <button class="overlay-btn"><i class="bi bi-box-arrow-up-right"></i></button>
+          </div>
+        </div>
+        <div class="author-row">
+          <div class="author-avatar-text" style="background:#f0a500; border: 1.5px solid #ddd;">
+            <i class="bi bi-c-circle-fill" style="color:#fff; font-size:16px;"></i>
+          </div>
+          <span class="author-name">Canto</span>
+          <div class="stat-row">
+            <span class="ad-actions">
+              <a href="#">Hide ads</a> &bull; <a href="#">Advertise</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 – Ramy Wafaa (tan, green illustrations) -->
+    <div class="col-12 col-md-4">
+      <div class="shot-card">
+        <div class="shot-thumb canvas-tan" style="position:relative;">
+          <div class="shot-placeholder canvas-tan" style="aspect-ratio:4/3;">
+            <div class="illus-grid">
+              <div class="illus-figure" style="background:#3ecf8e; font-size:28px;">🧑‍🎨</div>
+              <div class="illus-figure" style="background:#3ecf8e; font-size:28px;">🤸</div>
+              <div class="illus-figure" style="background:#3ecf8e; font-size:28px;">👩‍💻</div>
+              <div class="illus-figure" style="background:#3ecf8e; font-size:28px;">🐱</div>
+              <div class="illus-figure" style="background:#3ecf8e; font-size:28px;">🌿</div>
+              <div class="illus-figure" style="background:#3ecf8e; font-size:28px;">🦋</div>
+            </div>
+          </div>
+          <div class="shot-overlay">
+            <span class="shot-overlay-title">ilcons / mini illustr...</span>
+          </div>
+          <div class="overlay-actions">
+            <button class="overlay-btn"><i class="bi bi-bookmark"></i></button>
+            <button class="overlay-btn"><i class="bi bi-heart"></i></button>
+          </div>
+        </div>
+        <div class="author-row">
+          <div class="author-avatar-text" style="background:#3a86c8;">RW</div>
+          <span class="author-name">Ramy Wafaa</span>
+          <span class="badge-pro">PRO</span>
+          <div class="stat-row">
+            <span class="stat-item"><i class="bi bi-heart"></i> 513</span>
+            <span class="stat-item"><i class="bi bi-eye"></i> 143k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /row -->
+</div><!-- /container -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+      border-bottom: 1px solid #e8e8e8;
+      margin-bottom: 28px;
+    }
+
+    .btn-popular {
+      border: 1.5px solid #ddd;
+      border-radius: 999px;
+      background: #fff;
+      color: #1a1a1a;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 6px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .btn-popular:hover { background: #f5f5f5; }
+
+    .filter-tabs {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: nowrap;
+      overflow: hidden;
+    }
+
+    .filter-tab {
+      background: none;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: #6e6e6e;
+      padding: 6px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .filter-tab:hover { background: #f5f5f5; color: #1a1a1a; }
+
+    .filter-tab.active {
+      color: #1a1a1a;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .btn-filters {
+      border: 1.5px solid #ddd;
+      border-radius: 999px;
+      background: #fff;
+      color: #1a1a1a;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 6px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .btn-filters:hover { background: #f5f5f5; }
+
+    /* ── Shot card ── */
+    .shot-card {
+      margin-bottom: 32px;
+    }
+
+    .shot-thumb {
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .shot-thumb img,
+    .shot-thumb .shot-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .shot-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .shot-thumb:hover img,
+    .shot-thumb:hover .shot-placeholder {
+      transform: scale(1.02);
+    }
+
+    .shot-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0) ;
+      border-radius: 12px;
+      transition: background 0.25s;
+      display: flex;
+      align-items: flex-end;
+      padding: 12px;
+      pointer-events: none;
+    }
+
+    .shot-thumb:hover .shot-overlay {
+      background: rgba(0,0,0,0.08);
+    }
+
+    .shot-overlay-title {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      background: rgba(0,0,0,0.55);
+      border-radius: 6px;
+      padding: 4px 8px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .shot-thumb:hover .shot-overlay-title {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .overlay-actions {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 6px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .shot-thumb:hover .overlay-actions { opacity: 1; }
+
+    .overlay-btn {
+      background: #fff;
+      border: none;
+      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #444;
+      cursor: pointer;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+
+    .overlay-btn:hover { background: #f5f5f5; }
+
+    /* ── Author row ── */
+    .author-row {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      gap: 8px;
+    }
+
+    .author-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .author-avatar-text {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .author-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: #1a1a1a;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .badge-team, .badge-pro {
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 1px 5px;
+      flex-shrink: 0;
+    }
+
+    .badge-team {
+      background: #eaf0ff;
+      color: #3d5af1;
+    }
+
+    .badge-pro {
+      background: #fff3db;
+      color: #c07a00;
+    }
+
+    .stat-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: #9e9e9e;
+    }
+
+    /* ── Placeholder canvases ── */
+    .canvas-beige   { background: #f5ede0; }
+    .canvas-black   { background: #1a1a1a; }
+    .canvas-white   { background: #f0f0f0; border: 1px solid #e5e5e5; }
+    .canvas-orange  { background: #f0a500; }
+    .canvas-cream2  { background: #f5ede0; }
+    .canvas-tan     { background: #e8e0d0; }
+
+    /* Icon grid inside shot placeholders */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 28px;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+    }
+
+    .icon-grid i {
+      font-size: 26px;
+      color: #6a7bbd;
+      opacity: 0.85;
+    }
+
+    .icon-grid-dark i { color: #ccc; }
+
+    .icon-grid-outline i {
+      font-size: 24px;
+      color: #888;
+      opacity: 0.7;
+    }
+
+    .icon-grid-purple i {
+      font-size: 30px;
+      color: #5146d6;
+    }
+
+    /* Illustration placeholder */
+    .illus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 24px;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+    }
+
+    .illus-figure {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+    }
+
+    .ad-card .shot-placeholder {
+      background: #f0a500;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .ad-label {
+      font-size: 12px;
+      color: #9e9e9e;
+    }
+
+    .ad-actions {
+      font-size: 12px;
+      color: #9e9e9e;
+    }
+
+    .ad-actions a { color: #9e9e9e; text-decoration: none; }
+    .ad-actions a:hover { color: #444; }
+  </style>
+</head>
+<body>
+
+<div class="container-lg px-4">
+
+  <!-- Filter bar -->
+  <div class="filter-bar d-flex align-items-center gap-3">
+
+    <button class="btn-popular">
+      Popular <i class="bi bi-chevron-down" style="font-size:11px;"></i>
+    </button>
+
+    <div class="filter-tabs">
+      <button class="filter-tab active">Discover</button>
+      <button class="filter-tab">Animation</button>
+      <button class="filter-tab">Branding</button>
+      <button class="filter-tab">Illustration</button>
+      <button class="filter-tab">Mobile</button>
+      <button class="filter-tab">Print</button>
+      <button class="filter-tab"><i class="bi bi-chevron-right"></i></button>
+    </div>
+
+    <button class="btn-filters ms-auto">
+      <i class="bi bi-sliders"></i> Filters
+    </button>
+
+  </div>
+
+  <!-- Shot grid -->
+  <div class="row g-4">
+
+    <!-- Card 1 – Siege Media (beige, business icons) -->
+    <div class="col-12 col-md-4">
+      <div class="shot-card">
+        <div class="shot-thumb canvas-beige">
+          <div class="shot-placeholder canvas-beige" style="aspect-ratio:4/3;">
+            <div class="icon-grid">
+              <i class="bi bi-bar-chart-line"></i>
+              <i class="bi bi-bank"></i>
+              <i class="bi bi-dice-3"></i>
+              <i class="bi bi-bag-dollar"></i>
+              <i class="bi bi-tools"></i>
+              <i class="bi bi-globe2"></i>
+              <i class="bi bi-handshake"></i>
+              <i class="bi bi-calendar3"></i>
+              <i class="bi bi-megaphone"></i>
+            </div>
+          </div>
+          <div class="shot-overlay"></div>
+        </div>
+        <div class="author-row">
+          <div class="author-avatar-text" style="background:#d44;">sm</div>
+          <span class="author-name">Siege Media</span>
+          <span class="badge-team">TEAM</span>
+          <div class="stat-row">
+            <span class="stat-item"><i class="bi bi-heart"></i> 193</span>
+            <span class="stat-item"><i class="bi bi-eye"></i> 67.4k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 – Orman Clark (dark, dense icon set) -->
+    <div class="col-12 col-md-4">
+      <div class="shot-card">
+        <div class="shot-thumb canvas-black">
+          <div class="shot-placeholder canvas-black" style="aspect-ratio:4/3;">
+            <div class="icon-grid icon-grid-dark" style="grid-template-columns: repeat(8,1fr); gap:10px; padding:20px;">
+              <i class="bi bi-type-h1"></i><i class="bi bi-type-h2"></i><i class="bi bi-type-h3"></i><i class="bi bi-type-bold"></i>
+              <i class="bi bi-type-italic"></i><i class="bi bi-link45deg"></i><i class="bi bi-image"></i><i class="bi bi-table"></i>
+              <i class="bi bi-list-ul"></i><i class="bi bi-list-ol"></i><i class="bi bi-code-slash"></i><i class="bi bi-blockquote-left"></i>
+              <i class="bi bi-grip-horizontal"></i><i class="bi bi-layout-split"></i><i class="bi bi-columns-gap"></i><i class="bi bi-grid-3x3"></i>
+              <i class="bi bi-mic"></i><i class="bi bi-camera-video"></i><i class="bi bi-film"></i><i class="bi bi-music-note"></i>
+              <i class="bi bi-file-text"></i><i class="bi bi-file-earmark-pdf"></i><i class="bi bi-folder2"></i><i class="bi bi-archive"></i>
+              <i class="bi bi-search"></i><i class="bi bi-sliders"></i><i class="bi bi-funnel"></i><i class="bi bi-sort-down"></i>
+              <i class="bi bi-bell"></i><i class="bi bi-gear"></i><i class="bi bi-lock"></i><i class="bi bi-shield-check"></i>
+            </div>
+          </div>
+          <div class="shot-overlay"></div>
+        </div>
+        <div class="author-row">
+          <div class="author-avatar-text" style="background:#5b8ef0;">OC</div>
+          <span class="author-name">Orman Clark</span>
+          <span class="badge-pro">PRO</span>
+          <div class="stat-row">
+            <span class="stat-item"><i class="bi bi-heart"></i> 98</span>
+            <span class="stat-item"><i class="bi bi-eye"></i> 24.2k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 – Jordon Cheung (light, outline icons) -->
+    <div class="col-12 col-md-4">
+      <div class="shot-card">
+        <div class="shot-thumb canvas-white">
+          <div class="shot-placeholder canvas-white" style="aspect-ratio:4/3;">
+            <div class="icon-grid icon-grid-outline" style="grid-template-columns:repeat(5,1fr); gap:14px; padding:24px;">
+              <i class="bi bi-diagram-3"></i><i class="bi bi-grid-1x2"></i><i class="bi bi-bezier2"></i><i class="bi bi-calendar4"></i><i class="bi bi-gear-wide"></i>
+              <i class="bi bi-cloud-download"></i><i class="bi bi-file-earmark-bar-graph"></i><i class="bi bi-eyedropper"></i><i class="bi bi-lock-fill"></i><i class="bi bi-pin-map"></i>
+              <i class="bi bi-floppy"></i><i class="bi bi-sliders2"></i><i class="bi bi-shield-half"></i><i class="bi bi-chat-dots"></i><i class="bi bi-card-image"></i>
+              <i class="bi bi-diagram-2"></i><i class="bi bi-briefcase"></i><i class="bi bi-graph-up"></i><i class="bi bi-arrow-left-right"></i><i class="bi bi-bar-chart-steps"></i>
+            </div>
+          </div>
+          <div class="shot-overlay"></div>
+        </div>
+        <div class="author-row">
+          <div class="author-avatar-text" style="background:#9b7ec8;">JC</div>
+          <span class="author-name">Jordon Cheung</span>
+          <div class="stat-row">
+            <span class="stat-item"><i class="bi bi-heart"></i> 176</span>
+            <span class="stat-item"><i class="bi bi-eye"></i> 57.1k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 – Aldo Crusher (beige, purple 3D icons) -->
+    <div class="col-12 col-md-4">
+      <div class="shot-card">
+        <div class="shot-thumb canvas-beige">
+          <div class="shot-placeholder canvas-beige" style="aspect-ratio:4/3;">
+            <div class="icon-grid icon-grid-purple" style="grid-template-columns:repeat(3,1fr); gap:18px; padding:30px;">
+              <i class="bi bi-camera-fill"></i>
+              <i class="bi bi-person-fill"></i>
+              <i class="bi bi-box-fill"></i>
+              <i class="bi bi-key-fill"></i>
+              <i class="bi bi-stars"></i>
+              <i class="bi bi-heart-fill"></i>
+              <i class="bi bi-moon-stars-fill"></i>
+              <i class="bi bi-gem"></i>
+              <i class="bi bi-eye-fill"></i>
+            </div>
+          </div>
+          <div class="shot-overlay"></div>
+        </div>
+        <div class="author-row">
+          <div class="author-avatar-text" style="background:#e05;">AC</div>
+          <span class="author-name">Aldo Crusher</span>
+          <span class="badge-pro">PRO</span>
+          <div class="stat-row">
+            <span class="stat-item"><i class="bi bi-heart"></i> 65</span>
+            <span class="stat-item"><i class="bi bi-eye"></i> 6.7k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 – Canto (ad, orange) -->
+    <div class="col-12 col-md-4">
+      <div class="shot-card ad-card">
+        <div class="shot-thumb" style="position:relative;">
+          <div class="shot-placeholder canvas-orange" style="aspect-ratio:4/3; border-radius:12px;">
+          </div>
+          <div class="overlay-actions" style="opacity:1;">
+            <button class="overlay-btn"><i class="bi bi-box-arrow-up-right"></i></button>
+          </div>
+        </div>
+        <div class="author-row">
+          <div class="author-avatar-text" style="background:#f0a500; border: 1.5px solid #ddd;">
+            <i class="bi bi-c-circle-fill" style="color:#fff; font-size:16px;"></i>
+          </div>
+          <span class="author-name">Canto</span>
+          <div class="stat-row">
+            <span class="ad-actions">
+              <a href="#">Hide ads</a> &bull; <a href="#">Advertise</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 – Ramy Wafaa (tan, green illustrations) -->
+    <div class="col-12 col-md-4">
+      <div class="shot-card">
+        <div class="shot-thumb canvas-tan" style="position:relative;">
+          <div class="shot-placeholder canvas-tan" style="aspect-ratio:4/3;">
+            <div class="illus-grid">
+              <div class="illus-figure" style="background:#3ecf8e; font-size:28px;">🧑‍🎨</div>
+              <div class="illus-figure" style="background:#3ecf8e; font-size:28px;">🤸</div>
+              <div class="illus-figure" style="background:#3ecf8e; font-size:28px;">👩‍💻</div>
+              <div class="illus-figure" style="background:#3ecf8e; font-size:28px;">🐱</div>
+              <div class="illus-figure" style="background:#3ecf8e; font-size:28px;">🌿</div>
+              <div class="illus-figure" style="background:#3ecf8e; font-size:28px;">🦋</div>
+            </div>
+          </div>
+          <div class="shot-overlay">
+            <span class="shot-overlay-title">ilcons / mini illustr...</span>
+          </div>
+          <div class="overlay-actions">
+            <button class="overlay-btn"><i class="bi bi-bookmark"></i></button>
+            <button class="overlay-btn"><i class="bi bi-heart"></i></button>
+          </div>
+        </div>
+        <div class="author-row">
+          <div class="author-avatar-text" style="background:#3a86c8;">RW</div>
+          <span class="author-name">Ramy Wafaa</span>
+          <span class="badge-pro">PRO</span>
+          <div class="stat-row">
+            <span class="stat-item"><i class="bi bi-heart"></i> 513</span>
+            <span class="stat-item"><i class="bi bi-eye"></i> 143k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /row -->
+</div><!-- /container -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
